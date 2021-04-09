@@ -1,22 +1,31 @@
 <?php 
 
-require_once("vendor/autoload.php");
+require_once("vendor/autoload.php"); // traz as dependências
 
-$app = new \Slim\Slim();
+//carrrega classes 
+use \Slim\Slim; 
+use \helping\Page;
+
+
+$app = new Slim(); //rota | manda para algum lugar
 
 $app->config('debug', true);
 
-$app->get('/', function() {
+$app->get('/', function() { //quando chamar sem nenhum tipo de rota
     
-	$sql = new helping\DB\Sql();
+	//$sql = new helping\DB\Sql();
 
-	$results = $sql->select("SELECT * FROM tb_users");
+	//$results = $sql->select("SELECT * FROM tb_users");
 
-	echo json_encode($results);
+	//echo json_encode($results);
 	//var_dump($results);
+	$page = new Page(); //cria nova página 
+	$page->setTpl("index"); //carrega conteúdo html principal
+
+
 
 });
 
-$app->run();
+$app->run(); 
 
  ?>
