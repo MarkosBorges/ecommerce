@@ -1,5 +1,5 @@
 {
-    "name": "hcodebr/ecommerce",
+    "name": "helping/ecommerce",
     "authors": [
         {
             "name": "Helping Ecommerce",
@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "": "vendor\\helping\\php-classes\\src"
+            "helping\\": "vendor\\helping\\php-classes\\src"
         }
     }
 }
