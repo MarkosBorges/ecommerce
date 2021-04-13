@@ -11,7 +11,7 @@ $app = new Slim(); //rota | manda para algum lugar
 
 $app->config('debug', true);
 
-$app->get('/', function() { //quando chamar sem nenhum tipo de rota
+$app->get('/', function() { //chamar sem nenhum tipo de rota
     
 	//$sql = new helping\DB\Sql();
 

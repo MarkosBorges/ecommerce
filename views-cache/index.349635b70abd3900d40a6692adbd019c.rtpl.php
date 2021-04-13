@@ -1,4 +1,4 @@
-   
+<?php if(!class_exists('Rain\Tpl')){exit;}?>   
     <div class="slider-area">
         	<!-- Slider -->
 			<div class="block-slider block-slider4">
