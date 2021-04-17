@@ -6,7 +6,7 @@ use \helping\DB\Sql;
 use \helping\Model;
 use \helping\Mailer;
 
-class User extends Model{
+class Category extends Model{
 
 	const SESSION = "User"; 
 	const SECRET = "HelpingPhp_Secret";
