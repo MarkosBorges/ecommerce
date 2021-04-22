@@ -70,8 +70,11 @@ $app->post("/admin/categories/:idcategory", function($idcategory){
 	header('Location: /admin/categories');
 	exit();
 });
+//-------------------------------------------------------
+
 
 //___________________________________________________
+// ============== categories ====================
 
 $app->get("/admin/categories/:idcategory/products", function($idcategory){
 
@@ -85,9 +88,41 @@ $app->get("/admin/categories/:idcategory/products", function($idcategory){
 
 	$page->setTpl("categories-products", [
 		'category'=>$category->getValues(),
-		'productsRelated'=>$category->getProducts(),
+		'productsRelated'=>$category->getProducts(true),
 		'productsNotRelated'=>$category->getProducts(false)
 	]);
 
+});
+//============================================
+$app->get("/admin/categories/:idcategory/products/:idproduct/add", function($idcategory, $idproduct){
+
+	User::verifyLogin();
+
+	$category = new Category();
+
+	$category->get((int)$idcategory);
+
+	$product = new Product();
+	$product->get((int)$idproduct);
+	$category->addProduct($product);
+
+	header("Location: /admin/categories/".$idcategory."/products");
+	exit();
+});
+
+$app->get("/admin/categories/:idcategory/products/:idproduct/remove", function($idcategory, $idproduct){
+
+	User::verifyLogin();
+
+	$category = new Category();
+
+	$category->get((int)$idcategory);
+
+	$product = new Product();
+	$product->get((int)$idproduct);
+	$category->removeProduct($product);
+
+	header("Location: /admin/categories/".$idcategory."/products");
+	exit();
 });
 ?>
