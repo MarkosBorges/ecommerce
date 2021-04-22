@@ -16,6 +16,20 @@ class Product extends Model{
 
 	}
 
+	public static function checkList($list){
+
+		foreach ($list as &$row) {//altera indiretamente dentro do array $list
+			# code...
+			$p = new Product();
+			$p->setData($row);
+			$row = $p->getValues();
+		}
+
+		return $list;
+	}
+//################################ Format Price ###########################
+//##################################FIM FORMAT#################################
+
 	public function save(){
 
 		$sql = new Sql();
