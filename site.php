@@ -3,6 +3,7 @@
 use \helping\Page;
 use \helping\Model\Product;
 use \helping\Model\Category;
+use \helping\Model\Cart;
 
 $app->get('/', function() { //chamar sem nenhum tipo de rota
     
@@ -17,9 +18,6 @@ $app->get('/', function() { //chamar sem nenhum tipo de rota
 	$page->setTpl("index",[
 		'products'=>Product::checkList($products)
 	]); //carrega conteúdo html principal
-
-
-
 });
 
 $app->get("/categories/:idcategory", function($idcategory){
@@ -57,14 +55,20 @@ $app->get("/products/:desurl", function($desurl){
 	$page = new Page();
 
 	$page->setTpl("product-detail",[
-
 		'product'=>$product->getValues(),
 		'categories'=>$product->getCategories()
 	]);
 
 
 });
+// ------------- car -----------
+$app->get("/cart", function(){
+	$cart = Cart::getFromSession();
+	
+	$page = new Page();
+	$page->setTpl("cart");
 
 
+});
 
  ?>
