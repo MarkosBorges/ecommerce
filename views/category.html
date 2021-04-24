@@ -20,7 +20,7 @@
                     <div class="product-upper">
                         <img src="{$value.desphoto}" alt="">
                     </div>
-                    <h2><a href="/rpoducts/{$value.desurl}">{$value.desproduct}</a></h2>
+                    <h2><a href="/products/{$value.desurl}">{$value.desproduct}</a></h2>
                     <div class="product-carousel-price">
                         <ins>R${function="formatPrice($value.vlprice)"}</ins>
                     </div>  
@@ -40,7 +40,7 @@
                     <nav>
                         <ul class="pagination">
                         {loop="$pages"}
-                        <li><a href="{value.link}">{value.page}</a></li>
+                        <li><a href="{$value.link}">{$value.page}</a></li>
                         {/loop}
                         </ul>
                     </nav>                        

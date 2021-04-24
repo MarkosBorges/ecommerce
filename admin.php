@@ -4,7 +4,7 @@ use \helping\PageAdmin;
 use \helping\Model\User;
 
 
-$app->get('/admin', function() { //chamar sem nenhum tipo de rota
+$app->get('/admin/', function() { //chamar sem nenhum tipo de rota
   
   	User::verifyLogin();  
 	//$sql = new helping\DB\Sql();
