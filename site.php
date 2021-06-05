@@ -70,8 +70,8 @@ $app->get("/cart", function(){
 
 	$page->setTpl("cart", [
 		'cart'=>$cart->getValues(),
-		'product'=>$cart->getProducts(),
-		'error'=>Cart::getMsgError()
+		'products'=>$cart->getProducts(),
+//		'error'=>Cart::getMsgError()
 	]);
 
 });
@@ -101,8 +101,7 @@ $app->get("/cart/:idproduct/minus", function($idproduct){
 
 	//recupera carrinho da session
 	$cart = Cart::getFromSession();
-	$cart->removeProduct($product, true);
-
+	$cart->removeProduct($product);
 	header("Location: /cart");
 	exit();
 

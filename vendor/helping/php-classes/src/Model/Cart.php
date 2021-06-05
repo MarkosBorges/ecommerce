@@ -37,8 +37,8 @@ class Cart extends Model{
 				$cart->setToSession();
 
 			}
-		return $cart;
 		}
+		return $cart;
 	}
 
 	public function setToSession()
@@ -118,7 +118,7 @@ class Cart extends Model{
 
 		$sql = new Sql();
 
-		$rows = $sql->select("
+		return Product::checklist($sql->select("
 			SELECT b.idproduct, b.desproduct , b.vlprice, b.vlwidth, b.vlheight, b.vllength, b.vlweight, b.desurl, COUNT(*) AS nrqtd, SUM(b.vlprice) AS vltotal 
 			FROM tb_cartsproducts a 
 			INNER JOIN tb_products b ON a.idproduct = b.idproduct 
@@ -127,9 +127,9 @@ class Cart extends Model{
 			ORDER BY b.desproduct
 		", [
 			':idcart'=>$this->getidcart()
-		]);
+		]));
 
-		return Product::checkList($rows);
+	//	return Product::checkList($rows);
 
 	}
 }
