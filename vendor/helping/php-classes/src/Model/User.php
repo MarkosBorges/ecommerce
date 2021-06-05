@@ -53,7 +53,6 @@ class User extends Model{
 				return false;
 			}
 
-
 		}
 
 	}
@@ -85,6 +84,10 @@ class User extends Model{
 
 			$_SESSION[User::SESSION] = $user->getValues();
 
+
+
+//			echo "<script type='javascript'>alert('Login feito com Sucesso!');";
+//			echo "javascript:window.location='login.php';</script>";
 			return $user;
 
 		}else{
@@ -96,9 +99,13 @@ class User extends Model{
 	//verifica se é um user admin ==================================
 	public static function verifyLogin($inadmin = true){ 
 
-		if(User::checkLogin($inadmin)){
+		if(!User::checkLogin($inadmin)){
 			
-			header("Location: /admin/login");
+			if($inadmin){
+				header("Location: /admin/login");
+			}else{
+				header("Location: /login");
+			}
 			exit();
 		}
 	}

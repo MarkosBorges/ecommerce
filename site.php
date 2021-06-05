@@ -1,9 +1,10 @@
-<?php 
+<?php
 
 use \helping\Page;
 use \helping\Model\Product;
 use \helping\Model\Category;
 use \helping\Model\Cart;
+use \helping\Model\User;
 
 $app->get('/', function() { //chamar sem nenhum tipo de rota
     
@@ -63,12 +64,60 @@ $app->get("/products/:desurl", function($desurl){
 });
 // ------------- car -----------
 $app->get("/cart", function(){
+
+	$cart = Cart::getFromSession();
+	$page = new Page();
+
+	$page->setTpl("cart", [
+		'cart'=>$cart->getValues(),
+		'product'=>$cart->getProducts(),
+		'error'=>Cart::getMsgError()
+	]);
+
+});
+// ----------- carrinho ----------
+$app->get("/cart/:idproduct/add", function($idproduct){
+	$product = new Product();
+	$product->get((int)$idproduct);
+
+	//recupera carrinho da session
 	$cart = Cart::getFromSession();
 	
-	$page = new Page();
-	$page->setTpl("cart");
+	$qtd = (isset($_GET['qtd'])) ? (int)$_GET['qtd'] : 1;
+	for ($i = 0; $i < $qtd; $i++) {
+		
+		$cart->addProduct($product);
 
+	}
+
+	header("Location: /cart");
+	exit();
 
 });
 
- ?>
+$app->get("/cart/:idproduct/minus", function($idproduct){
+	$product = new Product();
+	$product->get((int)$idproduct);
+
+	//recupera carrinho da session
+	$cart = Cart::getFromSession();
+	$cart->removeProduct($product, true);
+
+	header("Location: /cart");
+	exit();
+
+});
+$app->get("/cart/:idproduct/remove", function($idproduct){
+	$product = new Product();
+	$product->get((int)$idproduct);
+
+	//recupera carrinho da session
+	$cart = Cart::getFromSession();
+	$cart->removeProduct($product, true);
+
+	header("Location: /cart");
+	exit;
+
+});
+
+?>

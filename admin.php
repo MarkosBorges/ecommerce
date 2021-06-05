@@ -34,7 +34,7 @@ $app->post('/admin/login', function(){ // rota post para login
 
 	User::login($_POST["login"], $_POST["password"]); //valida o login
 
-	header("Location: /admin"); // redireciona para a homepage da admin
+	header("Location: /admin/"); // redireciona para a homepage da admin
 	exit;
 });
 
